@@ -4,7 +4,8 @@
 Para rodar esse sistema voce precisa
 
 * Instalar o VScode
-* Instalar o sqlite em https://www.sqlite.org/download.html, verifique qual com o seu sistema operacional funcionara
+* Instalar o sqlite em https://www.sqlite.org/download.html, verifique qual com o seu sistema operacional e baixe
+
 * Adcione o local da pasta nas variaveis de ambiente
 * No terminal do VScode execute:
     Obs: pode mudar os comandos caso seja Lixus ou mac, esses é para windows
