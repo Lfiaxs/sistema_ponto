@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sqlite3
+import subprocess
+import os
 
 app = Flask(__name__)
 CORS(app)  # Permite que o React acesse os endpoints
@@ -52,4 +54,14 @@ def remover_colaborador(id_colaborador):
     return jsonify({"message": f"Colaborador ID {id_colaborador} removido com sucesso!"})
 
 if __name__ == "__main__":
+    db_create_path = 'db/create_bd.py'
+    db_path = 'db/registro_ponto.bd'
+
+    if os.path.exists(db_path):
+        print('Banco de dados já criado')
+    else:
+        result = subprocess.run(['python', db_create_path], capture_output=True, text=True)
+        print(result.stdout)
+        print(result.stderr)
+
     app.run(debug=True)
