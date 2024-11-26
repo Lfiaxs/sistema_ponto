@@ -137,7 +137,7 @@ def adicionar_colaborador():
 
             conn.commit()  # Comitar a transação
             
-        return jsonify({"message": f"Colaborador {nome} adicionado com sucesso!"}), 201
+        return jsonify({"message": f"Colaborador {nome} adicionado com sucesso! senha gerada: {senha}"}), 201
 
     except sqlite3.OperationalError as e:
         # Captura o erro de banco de dados bloqueado

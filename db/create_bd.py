@@ -36,6 +36,10 @@ CREATE TABLE IF NOT EXISTS registros (
 """)
 
 # Mensagem de sucesso
+cursor.execute("INSERT INTO usuarios (nome, senha, tipo) VALUES (?, ?, ?)", ('admin', '123', 'admin'))
+usuario_id = cursor.lastrowid
+cursor.execute("INSERT INTO colaboradores (usuario_id, nome) VALUES (?, ?)", (usuario_id, 'admin'))
+
 print("Banco de dados configurado com sucesso!")
 conn.commit()
 conn.close()
