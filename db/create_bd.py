@@ -1,5 +1,6 @@
 import sqlite3
 
+# Conexão com o banco de dados
 conn = sqlite3.connect("db/registro_ponto.db")
 cursor = conn.cursor()
 
@@ -17,7 +18,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS colaboradores (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL
+    usuario_id INTEGER NOT NULL,
+    nome TEXT NOT NULL,
+    FOREIGN KEY(usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 )
 """)
 
@@ -27,10 +30,12 @@ CREATE TABLE IF NOT EXISTS registros (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     colaborador_id INTEGER NOT NULL,
     hora_registro TEXT NOT NULL,
+    data_registro TEXT NOT NULL,
     FOREIGN KEY(colaborador_id) REFERENCES colaboradores(id)
 )
 """)
 
-print("Banco de dados configurado!")
+# Mensagem de sucesso
+print("Banco de dados configurado com sucesso!")
 conn.commit()
 conn.close()
