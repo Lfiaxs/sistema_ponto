@@ -48,6 +48,7 @@ def login():
         return jsonify({"error": str(e)}), 500
 
 
+
 @app.route("/registrar_ponto", methods=["POST"])
 def registrar_ponto():
     data = request.json
@@ -79,6 +80,33 @@ def registrar_ponto():
         return jsonify({"error": f"Erro no banco de dados: {e}"}), 500
     except Exception as e:
         return jsonify({"error": "Ocorreu um erro inesperado."}), 500
+
+@app.route("/colaboradores/<int:usuario_id>", methods=["GET"])
+def mostrar_colaborador(usuario_id):
+    if not usuario_id:
+        return jsonify({"erro": "usuario_id não fornecido"}), 400
+
+    conn = sqlite3.connect("db/registro_ponto.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            SELECT nome
+            FROM colaboradores
+            WHERE usuario_id = ?
+        """, (usuario_id,))
+        
+        colaborador = cursor.fetchone()
+
+        if colaborador:
+            return jsonify({"nome": colaborador[0]})
+        else:
+            return jsonify({"erro": "Colaborador não encontrado"}), 404
+    except sqlite3.Error as e:
+        print(f"Erro ao acessar o banco de dados: {e}")
+        return jsonify({"erro": "Erro ao acessar o banco de dados"}), 500
+    finally:
+        conn.close()
 
 
 # Listar Colaboradores
