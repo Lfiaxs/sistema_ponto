@@ -124,18 +124,18 @@ def listar_colaboradores():
     return jsonify([{"id": colab[0], "nome": colab[1], "usuario_nome": colab[2]} for colab in colaboradores])
 
 # Listar Registros de Ponto
-@app.route("/registros", methods=["GET"])
-def listar_registros():
+@app.route("/registros/<int:colaborador_id>", methods=["GET"])
+def listar_registros_por_colaborador(colaborador_id):
     conn = sqlite3.connect("db/registro_ponto.db")
     cursor = conn.cursor()
     cursor.execute("""
-    SELECT registros.id, colaboradores.nome, registros.hora_registro
+    SELECT registros.id, registros.hora_registro
     FROM registros
-    INNER JOIN colaboradores ON registros.colaborador_id = colaboradores.id
-    """)
+    WHERE registros.colaborador_id = ?
+    """, (colaborador_id,))
     registros = cursor.fetchall()
     conn.close()
-    return jsonify([{"id_registro": reg[0], "nome": reg[1], "hora": reg[2]} for reg in registros])
+    return jsonify([{"id_registro": reg[0], "hora": reg[1]} for reg in registros])
 
 # Adicionar Colaborador
 @app.route("/colaboradores", methods=["POST"])

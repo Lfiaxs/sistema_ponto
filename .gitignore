@@ -1,0 +1,52 @@
+# Ignorar arquivos de ambiente
+.env
+
+# Ignorar diretórios do Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar configurações do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar configurações de IDEs
+.vscode/
+.idea/
+*.swp
+
+# Ignorar pacotes e builds
+node_modules/
+dist/
+build/
+*.cache
+
+# Ignorar arquivos de banco de dados locais
+*.sqlite3
+db.sqlite3
+
+# Ignorar arquivos de compilação
+*.out
+*.o
+*.class
+
+# Ignorar arquivos de pacotes
+*.egg-info/
+*.egg
+
+# Ignorar arquivos de deploy
+*.bak
+*.tmp
+
+# Ignorar arquivos específicos
+coverage/
