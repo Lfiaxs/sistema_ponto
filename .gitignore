@@ -1,8 +1,9 @@
 # Ignorar arquivos de ambiente
 .env
 
-registro_ponto.db/
+
 # Ignorar diretórios do Python
+db/registro_ponto.db
 __pycache__/
 *.py[cod]
 *.pyo
@@ -51,4 +52,3 @@ db.sqlite3
 
 # Ignorar arquivos específicos
 coverage/
-db/registro_ponto.db
