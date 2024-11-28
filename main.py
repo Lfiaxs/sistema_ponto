@@ -5,7 +5,8 @@ from flask_cors import CORS
 import sqlite3
 import subprocess
 import os
-from app.components.gerador_senha import gerar_senha
+
+from app.Password_generator import generate_password # type: ignore
 
 
 class RegistroPontoApp:
@@ -134,7 +135,7 @@ class RegistroPontoApp:
     def adicionar_colaborador(self):
         data = request.json
         nome = data.get("nome")
-        senha = gerar_senha()
+        senha = generate_password()
 
         try:
             with sqlite3.connect("db/registro_ponto.db", timeout=30) as conn:
