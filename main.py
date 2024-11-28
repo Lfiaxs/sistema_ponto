@@ -155,23 +155,35 @@ class RegistroPontoApp:
             return jsonify({"error": "Ocorreu um erro inesperado. Verifique os logs para mais detalhes."}), 500
 
     def remover_colaborador(self, id_colaborador):
+        print('removendo colaborador do id: ', id_colaborador)
         try:
             with sqlite3.connect("db/registro_ponto.db") as conn:
                 cursor = conn.cursor()
                 cursor.execute("SELECT usuario_id FROM colaboradores WHERE id = ?", (id_colaborador,))
                 colaborador = cursor.fetchone()
 
+
                 if colaborador:
                     usuario_id = colaborador[0]
+
+                    cursor.execute("SELECT COUNT(*) FROM registros WHERE colaborador_id = ?", (id_colaborador,))
+                    
+                    registros_count = cursor.fetchone()[0]
+
+                    if registros_count > 0:
+                        cursor.execute("DELETE FROM registros WHERE colaborador_id = ?", (id_colaborador,))
+
                     cursor.execute("DELETE FROM colaboradores WHERE id = ?", (id_colaborador,))
                     cursor.execute("DELETE FROM usuarios WHERE id = ?", (usuario_id,))
-                    cursor.execute("DELETE FROM registros WHERE colaborador_id = ?", (id_colaborador,))
+                    
                     conn.commit()
                     return jsonify({"message": f"Colaborador ID {id_colaborador} e usuário removidos com sucesso!"})
                 else:
                     return jsonify({"message": "Colaborador não encontrado!"}), 404
         except sqlite3.Error as e:
             return jsonify({"error": str(e)}), 500
+        except Exception as e:
+            return
 
 
 if __name__ == "__main__":
