@@ -6,7 +6,7 @@ import sqlite3
 import subprocess
 import os
 
-from app.Password_generator import generate_password # type: ignore
+from app.password_Generator import generate_password
 
 
 class RegistroPontoApp:
