@@ -75,7 +75,7 @@ class RegistroPontoApp:
                 )
                 conn.commit()
             return jsonify({
-                "message": "Ponto registrado com sucesso!",
+                "message": "Ponto registrado com sucesso!!",
                 "horario": hora_atual
                 }), 201
         except sqlite3.OperationalError as e:

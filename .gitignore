@@ -1,6 +1,7 @@
 # Ignorar arquivos de ambiente
 .env
 
+registro_ponto.db/
 # Ignorar diretórios do Python
 __pycache__/
 *.py[cod]
